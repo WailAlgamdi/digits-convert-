@@ -34,7 +34,11 @@ int is_word_in_file(char* word, char* file) {
 }
 
 char* number_to_word(int number, char* file) {
-    char* word = (char*)malloc(7 * sizeof(char)); 
+    char* word = (char*)malloc(7 * sizeof(char));
+if (word == NULL) {
+    printf("Error: Memory allocation failed\n");
+    return NULL;
+}   
     int i;
     for (i = 5; i >= 0; i--) {
         int digit = number % 10;
@@ -60,11 +64,15 @@ int main() {
     printf("Enter a six-digit number: "); 
     scanf("%d", &number);
     char* word = number_to_word(number, "words.txt");
+    
     if (word != NULL) {
+    printf("The word is: %s\n", word);
+} else if (strlen(word) > 0) {
     printf("The word is: %s\n", word);
 } else {
     printf("No word found for the number.\n");
 }
+
 
 
     if (strlen(word) > 0) {
