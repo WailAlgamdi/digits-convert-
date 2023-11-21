@@ -1,0 +1,83 @@
+// This function takes a number of seven digits and converts each digit to 3 letters
+// and creates a word that contains letters from all digits and checks by using
+// isRight(word) function. If it returns 1, the function returns 1. If not, it will
+// continue and check all possible words. It uses the digitToLetter(digit) function
+// that returns an array of char like ['a','b','c'] for each digit.
+int chek(char *word, int number, char *file) {
+  // Declare an array of char pointers to store the letters for each digit
+  char *letters[7];
+  // Declare a variable to store the index of the current digit
+  int index = 6;
+  // Loop through the number from right to left and get the letters for each digit
+  while (number > 0) {
+    // Get the last digit of the number
+    int digit = number % 10;
+    // Get the letters for the digit using the digitToLetter function
+    letters[index] = digitToLetter(digit);
+    // Update the number by removing the last digit
+    number = number / 10;
+    // Update the index by decrementing it
+    index--;
+  }
+  // Declare a variable to store the result of the isRight function
+  int result = 0;
+  // Declare a loop variable to iterate over the letters
+  int i;
+  // Loop through the first letter of the first digit
+  for (i = 0; i < 3; i++) {
+    // Assign the first letter of the word to the first letter of the first digit
+    word[0] = letters[0][i];
+    // Declare a loop variable to iterate over the letters
+    int j;
+    // Loop through the first letter of the second digit
+    for (j = 0; j < 3; j++) {
+      // Assign the second letter of the word to the first letter of the second digit
+      word[1] = letters[1][j];
+      // Declare a loop variable to iterate over the letters
+      int k;
+      // Loop through the first letter of the third digit
+      for (k = 0; k < 3; k++) {
+        // Assign the third letter of the word to the first letter of the third digit
+        word[2] = letters[2][k];
+        // Declare a loop variable to iterate over the letters
+        int l;
+        // Loop through the first letter of the fourth digit
+        for (l = 0; l < 3; l++) {
+          // Assign the fourth letter of the word to the first letter of the fourth digit
+          word[3] = letters[3][l];
+          // Declare a loop variable to iterate over the letters
+          int m;
+          // Loop through the first letter of the fifth digit
+          for (m = 0; m < 3; m++) {
+            // Assign the fifth letter of the word to the first letter of the fifth digit
+            word[4] = letters[4][m];
+            // Declare a loop variable to iterate over the letters
+            int n;
+            // Loop through the first letter of the sixth digit
+            for (n = 0; n < 3; n++) {
+              // Assign the sixth letter of the word to the first letter of the sixth digit
+              word[5] = letters[5][n];
+              // Declare a loop variable to iterate over the letters
+              int o;
+              // Loop through the first letter of the seventh digit
+              for (o = 0; o < 3; o++) {
+                // Assign the seventh letter of the word to the first letter of the seventh digit
+                word[6] = letters[6][o];
+                // Terminate the word with a null character
+                word[7] = '\0';
+                // Check if the word is right using the isRight function
+                result = isRight(word);
+                // If the result is 1, return 1 and exit the function
+                if (result == 1) {
+                  return 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // If none of the words is right, return 0
+  return 0;
+}
