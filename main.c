@@ -89,6 +89,10 @@ int number_to_two_words_3_4(char *word,int number,char *file){
     number = number / 10;
     index--;
   }
+  int j;
+  for(j=0;j<8;j++)
+  puts(letters[j]);
+  
   int i1;
   for (i1 = 0; i1 < 3; i1++) {
     word[0] = letters[0][i1];
@@ -104,27 +108,28 @@ int number_to_two_words_3_4(char *word,int number,char *file){
           }
         }
       }
-      return 0;
+   return 0;
                 
    second_Word:
    char second_word[5];
-   word[3] = '-';
+   second_word[3] = '-';
     int i4;
     for (i4 = 0; i4 < 3; i4++) {
-      word[4] = letters[4][i4];
+      second_word[0] = letters[3][i4];
       int i5;
       for (i5 = 0; i5 < 3; i5++) {
-        word[5] = letters[5][i5];
+        second_word[1] = letters[4][i5];
         int i6;
         for (i6 = 0; i6 < 3; i6++) {
-          word[6] = letters[6][i6];
+          second_word[2] = letters[5][i6];
           int i7;
           for (i7 = 0; i7 < 3; i7++) {
-            word[7] = letters[7][i7];
-            word[8] = '\0';
-            strcpy(second_word, word + 4);
-            if (is_word_in_file(second_word,file)) 
+            second_word[3] = letters[6][i7];
+            second_word[4] = '\0';
+            if (is_word_in_file(second_word,file)){
+              strcat(word,second_word);
               return 1;
+             }
            }
          }
        }
