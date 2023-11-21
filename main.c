@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
-char* digit_to_word(int digit) {
-    char* table[10] = {"ABC", "DEF", "GHI", "JKL", "MNO", "PRS", "TUV", "WXY", "Z", " "};
+char* digit_to_letter(int digit) {
+    char* table[10] = {"ABC", "DEF", "GHI", "JKL", "MNO", "PRS", "TUV", "WXY"};
     
-    if (digit >= 2 && digit <= 9) {
+    if (digit >= 2) {
         return table[digit - 2]; 
     } else {
         return ""; 
@@ -20,10 +21,10 @@ int is_word_in_file(char* word, char* file) {
         return 0;
     }
 
-    char line[100];
+    char line[8];
     while (fgets(line, sizeof(line), fp) != NULL) {
         line[strcspn(line, "\n")] = 0;
-        if (strcmp(word, line) == 0) {
+        if (strcasecmp(word, line) == 0) {
             fclose(fp);
             return 1;
         }
@@ -33,24 +34,57 @@ int is_word_in_file(char* word, char* file) {
     return 0;
 }
 
-char* number_to_word(char *word, int number, char* file) {
-    int i;
-    for(i = 5; i >= 0; i--) {
-        int digit = number % 10;
-        char* letter = digit_to_word(digit);
-        strncpy(word + i, letter, 1);
-        number = number / 10;
-    }
 
-    word[6] = '\0';
-    
-    return word;
+int number_to_word(char *word, int number, char* file) {
+  char *letters[7];
+  int index = 6;
+  while (number > 0) {
+    int digit = number % 10;
+    letters[index] = digit_to_letter(digit);
+    number = number / 10;
+    index--;
+  }
+  int result = 0;
+  int i;
+  for (i = 0; i < 3; i++) {
+    word[0] = letters[0][i];
+    int j;
+    for (j = 0; j < 3; j++) {
+      word[1] = letters[1][j];
+      int k;
+      for (k = 0; k < 3; k++) {
+        word[2] = letters[2][k];
+        int l;
+        for (l = 0; l < 3; l++) {
+          word[3] = letters[3][l];
+          int m;
+          for (m = 0; m < 3; m++) {
+            word[4] = letters[4][m];
+            int n;
+            for (n = 0; n < 3; n++) {
+              word[5] = letters[5][n];
+              int o;
+              for (o = 0; o < 3; o++) {
+                word[6] = letters[6][o];
+                word[7] = '\0';
+                result = is_word_in_file(word,file);
+                if (result == 1) {
+                  return 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return 0;
 }
 
 
 
 int main() {
-    char word[7];
+    char word[8];
     int number;
     printf("Enter a six-digit number: "); 
     scanf("%d", &number);
