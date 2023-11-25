@@ -5,13 +5,14 @@
 #include "myFunction.h"
 
 int main(){
-char word1[8];
-char word2[9];
-char word3[0];
+
 char file[] = "words.txt";
 int number;
 
 do{
+char word1[8];
+char word2[9];
+char word3[0];
 printf("Enter a Seven-digit number(It should not include 0 or 1): \n"); 
 printf("Enter the number(or 0 to end): "); 
 scanf("%d", &number);
